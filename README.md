@@ -19,7 +19,7 @@ Usage is the same as The League's OAuth client, using `\MathieuDumoutier\OAuth2\
 ```yaml
 knpu_oauth2_client:
     clients:
-        youapp_oauth:
+        yourapp_oauth:
             type: generic
             provider_class: MathieuDumoutier\OAuth2\Client\Provider\EnvConfigProvider
             provider_options:
@@ -33,11 +33,19 @@ knpu_oauth2_client:
             use_state: false
 ```
 
-You must define the 6 environment variables :
+You must define 6 environment variables :
 * OAUTH2_CLIENT_ID 
 * OAUTH2_CLIENT_SECRET
-* OAUTH2_SCOPES
+* OAUTH2_SCOPES (scopes would you want requested)
 * OAUTH2_BASE_APP_URL
 * OAUTH2_BASE_API_URL
 
-You must create the route "oauth2_check".
+You must create the route "oauth2_check" in a controller :
+
+```php
+#[Route('/oauth2_check', name: 'oauth2_check')]
+public function oauth2Check(): void
+{
+    // This action is not executed because onAuthenticationSuccess() method of the OAuth2Authenticator class redirect before
+}
+```
